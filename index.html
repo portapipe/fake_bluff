@@ -3,6 +3,7 @@
     <head>
         <title> Fake Bluff </title>
         <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <!-- CSS only -->
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
       <!-- JavaScript Bundle with Popper -->
@@ -76,7 +77,7 @@
           
           <div id="posto_dadi"></div>          
           <br/>
-          <button class="btn btn-primary" onmousedown="mostra_numeri()" onmouseup="nascondi_numeri()">MOSTRA DADI</button>
+          <button class="btn btn-primary" onmousedown="mostra_numeri()" ontouchstart="mostra_numeri()" onmouseup="nascondi_numeri()" ontouchend="nascondi_numeri()">MOSTRA DADI</button>
 
           <button class="btn btn-danger" onclick="if(confirm('Hai perso davvero?')){perso();}">Ho perso (Leva un dado)</button>
       </div>
