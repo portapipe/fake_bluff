@@ -1,1 +1,140 @@
-<h1> :) </h1>
+<!DOCTYPE html>
+<html lang="it">
+    <head>
+        <title> Fake Bluff </title>
+        <meta charset="UTF-8">
+      <!-- CSS only -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <!-- JavaScript Bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+      
+        <script src="js/index.js"></script>
+      
+      <style>
+        .dado{
+        	width: 50px;
+          height: 50px;
+          border: 2px solid black;
+          border-radius: 8px;
+          margin: 5px;
+          text-align:center;
+          display: inline-block;
+          background-color: #efefef;
+        }
+        .dado > div{
+        	margin-top: 11px;
+        	display: inline-block;
+          font-weight: bold;
+        }
+        
+        
+      </style>
+      
+      
+      
+   </head>
+    <body>
+        <header class="container">
+            <h1 class="text-center">Fake bluff</h1>
+            <p>
+                Un gioco semplice, scegli il numero di dadi, il tipo e sfodera la tua migliore poker face. <br/> Si gioca così: ogni giocatore tira i dadi, sapendo i numeri usciti deve dire un numero di dadi che crede ci sia in totale sommando tutti i dadi presenti in partita.  <br/> Esempio: 3 dadi con numeri da 1 a 4. Giocatore 1: "C'è un dado numero 1" Giocatore 2: "Ci sono due dadi numero 1" e così via (la somma dei dadi deve essere sempre dadi precedenti +1)    
+                
+            </p>
+        </header>
+      
+        <div class="container">
+          <h4>Seleziona il numero di dadi</h4>
+          <select id="scegli_dadi" class="form-control">
+            <option value="1">1 dado</option>
+            <option value="2">2 dadi</option>
+            <option value="3">3 dadi</option>
+            <option value="4">4 dadi</option>
+            <option value="5">5 dadi</option>
+            <option value="6" selected>6 dadi</option>
+          </select>
+          <h4>Seleziona il numero di facce</h4>
+          <select id="scegli_dadi" class="form-control">
+            <option value="4">4 facce</option>
+            <option value="6" selected>6 facce</option>
+            <option value="8">8 facce</option>
+            <option value="10">10 facce</option>
+            <option value="12">12 facce</option>
+            <option value="20">20 facce</option>
+          </select>
+          <br/>
+          <button class="btn btn-success" onclick="mischia();">COMINCIA LA PARTITA</button>
+
+      </div>
+      <hr/>
+        <div class="container" id="campo_da_gioco">
+          
+          <div id="posto_dadi"></div>
+          <div id="dado"></div>
+          
+          
+          <button class="btn btn-primary" onmousedown="console.log('premuto');" onmouseup="console.log('lasciato');">MOSTRA DADI</button>
+          <button class="btn btn-success">Genera dadi</button>
+          <button class="btn btn-danger">Ho perso (Leva un dado)</button>
+         
+        <footer class="container">
+					<p>
+						Gioco del caiz by Portapipe e Framattat, all rights reserved 2021©
+					</p>
+        </footer>
+    </body> 
+</html>
+
+<script>
+  
+  //$('#campo_da_gioco').hide();
+  
+var dadi = 6;
+var facce = 6;
+
+function init(){ 
+	console.debug("Caricati " + dadi + " dadi con " + facce + " facce.");
+  mischia();
+}
+  
+  function nascondi_numeri(){
+    $('.numero_dado').html("*");
+  }
+  
+  function mostra_numeri(){
+    $('.numero_dado').each(function(k,v){
+      
+    });
+  }
+  
+function mischia(){
+  $('#campo_da_gioco').slideDown();
+  
+  $('#posto_dadi').html("");
+  for(var dado = 1; dado<=dadi;dado++){
+    disegna_dado(numero_random(1,facce));
+  }
+  
+  setTimeout(function(){
+    nascondi_numeri();
+  },3000);
+}
+  
+function perso(){
+  dadi--;
+  mischia();
+}
+  
+  function disegna_dado(numero){
+    $('#posto_dadi').append('<div class="dado"><div class="numero_dado" valore_dado="'+numero+'">'+numero+'</div></div>');
+  }
+  
+  
+function numero_random(min, max) {
+	  max++;
+    return Math.floor(Math.random() * (max - min) + min); 
+} 
+
+</script>
