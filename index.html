@@ -40,7 +40,7 @@
         <header class="container">
             <h1 class="text-center">Fake bluff</h1>
             <p>
-                Un gioco semplice, scegli il numero di dadi, il tipo e sfodera la tua migliore poker face. <br/> Si gioca così: ogni giocatore tira i dadi, sapendo i numeri usciti deve dire un numero di dadi che crede ci sia in totale sommando tutti i dadi presenti in partita.  <br/> Esempio: 3 dadi con numeri da 1 a 4. Giocatore 1: "C'è un dado numero 1" Giocatore 2: "Ci sono due dadi numero 1" e così via (la somma dei dadi deve essere sempre dadi precedenti +1)    
+                Un gioco semplice, scegli il numero di dadi, quante facce devono avere e sfodera la tua migliore poker face. <br/> Si gioca così: ogni giocatore tira i dadi, sapendo i numeri usciti deve dire un numero di dadi che crede ci sia in totale sommando tutti i dadi presenti in partita.  <br/> Esempio: 3 dadi con numeri da 1 a 4. Giocatore 1: "C'è un dado numero 1" Giocatore 2: "Ci sono due dadi numero 1" e così via (la somma dei dadi deve essere sempre dadi precedenti +1)    
                 
             </p>
         </header>
@@ -56,7 +56,7 @@
             <option value="6" selected>6 dadi</option>
           </select>
           <h4>Seleziona il numero di facce</h4>
-          <select id="scegli_dadi" class="form-control">
+          <select id="scegli_facce" class="form-control">
             <option value="4">4 facce</option>
             <option value="6" selected>6 facce</option>
             <option value="8">8 facce</option>
@@ -65,23 +65,27 @@
             <option value="20">20 facce</option>
           </select>
           <br/>
-          <button class="btn btn-success" onclick="mischia();">COMINCIA LA PARTITA</button>
+          <button class="btn btn-success" onclick="init();">COMINCIA LA PARTITA</button>
 
       </div>
       <hr/>
+      
+      
+      
         <div class="container" id="campo_da_gioco">
           
-          <div id="posto_dadi"></div>
-          <div id="dado"></div>
-          
-          
-          <button class="btn btn-primary" onmousedown="console.log('premuto');" onmouseup="console.log('lasciato');">MOSTRA DADI</button>
-          <button class="btn btn-success">Genera dadi</button>
-          <button class="btn btn-danger">Ho perso (Leva un dado)</button>
-         
+          <div id="posto_dadi"></div>          
+          <br/>
+          <button class="btn btn-primary" onmousedown="mostra_numeri()" onmouseup="nascondi_numeri()">MOSTRA DADI</button>
+
+          <button class="btn btn-danger" onclick="if(confirm('Hai perso davvero?')){perso();}">Ho perso (Leva un dado)</button>
+      </div>
+      
+      
+      
         <footer class="container">
-					<p>
-						Gioco del caiz by Portapipe e Framattat, all rights reserved 2021©
+					<p><br/>
+						Gioco del caiz by Framattat e portapipe, all rights reserved 2021©
 					</p>
         </footer>
     </body> 
@@ -93,8 +97,13 @@
   
 var dadi = 6;
 var facce = 6;
+  
+//Faccio partire subito una partita
+  init();
 
 function init(){ 
+  dadi = $('#scegli_dadi option:selected').val();
+  facce = $('#scegli_facce option:selected').val();
 	console.debug("Caricati " + dadi + " dadi con " + facce + " facce.");
   mischia();
 }
@@ -105,7 +114,8 @@ function init(){
   
   function mostra_numeri(){
     $('.numero_dado').each(function(k,v){
-      
+      console.log($(v).attr("valore_dado"));
+      $(v).html($(v).attr("valore_dado"));
     });
   }
   
